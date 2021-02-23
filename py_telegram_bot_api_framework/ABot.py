@@ -5,9 +5,9 @@ from telegram_bot_api import API, Pooling, Update
 
 
 class ABot:
-	def __init__(self, config: dict):
-		self.config: dict = config
-		self.api: API = API(config.get("token"))
+	def __init__(self, token: str, **kwargs):
+		self.config: dict = kwargs
+		self.api: API = API(token)
 		self.handlers: List[AHandler] = []
 		self.pooling = None
 
@@ -33,7 +33,7 @@ class ABot:
 				break
 
 		if not handled_by:
-			print("[ABot]", "update", update)
+			print("[ABot]", "[Unhandled update]", update)
 
 	def start_pooling(self, update_time: int = 5, dev_mode: bool = False):
 		self.pooling = Pooling(self.api, self.on_update, update_time, dev_mode=dev_mode)

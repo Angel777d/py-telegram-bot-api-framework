@@ -1,8 +1,7 @@
 from typing import Callable, Dict
 
-from telegram_bot_api import Update, get_entities_by_type, MessageEntityType, API
-
 from py_telegram_bot_api_framework.AHandler import AHandler
+from telegram_bot_api import Update, get_entities_by_type, MessageEntityType, API
 
 HandlerFunc = Callable[[Update], bool]
 
@@ -16,9 +15,8 @@ class BotCommandHandler(AHandler):
 		self.registered_commands[cmd] = cmd_handler
 
 	def handle(self, update: Update) -> bool:
-		if update.message:
-			msg = update.message
-
+		msg = update.message
+		if msg:
 			commands = get_entities_by_type(msg, MessageEntityType.BOT_COMMAND)
 			for command in commands:
 				# remove bot name from command if any
