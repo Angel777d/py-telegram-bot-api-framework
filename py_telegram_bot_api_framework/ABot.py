@@ -5,7 +5,9 @@ from telegram_bot_api import API, Pooling, Update
 
 
 class ABot:
-	def __init__(self, token: str, **kwargs):
+	def __init__(self, token: str, name: str = "DefaultBotName", **kwargs):
+		self.name = name
+		self.token = token
 		self.config: dict = kwargs
 		self.api: API = API(token)
 		self.handlers: List[AHandler] = []
