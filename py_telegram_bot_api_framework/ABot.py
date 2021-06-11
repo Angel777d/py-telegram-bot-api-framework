@@ -1,3 +1,4 @@
+import logging
 from typing import List
 
 from py_telegram_bot_api_framework.AHandler import AHandler
@@ -35,7 +36,7 @@ class ABot:
 				break
 
 		if not handled_by:
-			print("[ABot]", "[Unhandled update]", update)
+			logging.debug(f"[ABot][Unhandled update] {update}")
 
 	def start_pooling(self, update_time: int = 5, dev_mode: bool = False):
 		self.pooling = Pooling(self.api, self.on_update, update_time, dev_mode=dev_mode)
